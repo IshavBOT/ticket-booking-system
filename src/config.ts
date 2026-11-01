@@ -16,4 +16,5 @@ export const config = {
   rateLimitPerMin: Number(e.RATE_LIMIT_PER_MIN ?? 300),
   bcryptRounds: Number(e.BCRYPT_ROUNDS ?? 10),
   smtpUrl: e.SMTP_URL, // unset => emails are rendered as JSON and logged, not sent
+  corsOrigins: (e.CORS_ORIGIN ?? 'http://localhost:5173').split(',').map((s) => s.trim()),
 };

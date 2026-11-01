@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, RequestHandler, Response } from 'express';
 import bcrypt from 'bcryptjs';
+import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import { z, ZodError } from 'zod';
 import { config } from './config';
@@ -63,6 +64,8 @@ const getBooking = async (id: number) => (await pool.query(`${BOOKING_SQL} WHERE
 
 // ---------- routes ----------
 export const app = express();
+app.set('trust proxy', 1);
+app.use(cors({ origin: config.corsOrigins }));
 app.use(express.json(), rateLimit);
 
 app.get('/health', (_req, res) => res.json({ ok: true }));

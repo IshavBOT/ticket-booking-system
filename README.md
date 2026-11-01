@@ -145,6 +145,11 @@ frontend/     React + Vite seat-map UI
 .github/      CI workflow (build + tests)
 ```
 
+## Deployment
+Backend: Render Web Service from the repo root (`npm start` after `npm run build`). Set `DATABASE_URL`, `REDIS_URL`, `JWT_SECRET`, `ADMIN_EMAIL`, and `CORS_ORIGIN` (your Vercel origin, no trailing slash; comma-separate extras).
+Frontend: Vercel project on `frontend/`. Set `VITE_API_URL` to the Render URL (no trailing slash). `vercel.json` rewrites all routes to `index.html`.
+Free Render/Vercel instances may take about a minute to wake on first load.
+
 ## Known limitations
 - **No payment step.** A booking confirms immediately. A production flow would add a `PENDING` state tied to the hold TTL, plus a payment webhook.
 - **Holds are soft.** The database lock is what prevents double booking, not the hold.
